@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #010a12;
+            color: white;
+        }
+
+        .navbar .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        .navbar .menu a:hover {
+            color: #1ABC9C;
+        }
+
+        .navbar .menu a.active {
+            color: #1ABC9C; /* اللون الأخضر للعنصر النشط */
+            font-weight: bold;
+            border-bottom: 2px solid #1ABC9C;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                background-color: #00060c;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .navbar .menu.active {
+                display: flex;
+                z-index: 5;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <img src="/img/logo3.png" alt="Logo">
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="aboutus.html" class="nav-link">About Us</a>
+        <a href="book.html" class="nav-link">Booking</a>
+        <a href="profileuser.html" class="nav-link">profile</a>
+        <a href="contactus.html" class="nav-link">Contact Us</a>
+        <a href="price.html" class="nav-link">price</a>
+        <a href="map.html" class="nav-link">map</map></a>
+        <a href="login.html" class="nav-link"> Log in</a>
+    </div>
+</div>
+
+<script>
+    // Function to toggle the menu in responsive mode
+    function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('active');
+    }
+
+    // Highlight the active link based on the current page
+    const navLinks = document.querySelectorAll('.nav-link');
+    const currentPath = window.location.pathname.toLowerCase(); // Get the current path
+
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').toLowerCase(); // Get href of each link
+        if (currentPath.endsWith(linkPath)) { // Check if the current path ends with the href
+            link.classList.add('active'); // Add the active class to the matching link
+        }
+    });
+</script>
+
+</body>
+</html>

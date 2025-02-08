@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Owner Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylee/stationoner.css">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <script>
+        fetch('./nav.html')
+         .then(response => response.text())
+         .then(data => {
+             document.getElementById('navbar').innerHTML = data;
+     
+             // إعادة تفعيل زر الـ Burger Menu
+             const menuToggle = document.querySelector('.menu-toggle');
+             const menu = document.querySelector('.menu');
+             if (menuToggle) {
+                 menuToggle.addEventListener('click', () => {
+                     menu.classList.toggle('active');
+                 });
+             }
+         });
+     
+     
+     
+    </script>
+         
+
+    <div id="navbar"></div>
+  
+
+
+    <!-- Header Section -->
+    <div class="bg-header">
+        <h1 class="text-4xl font-bold">Welcome to Your Station Dashboard</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+   
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="container mx-auto my-8 p-6">
+        <h2 class="text-2xl font-bold mb-6">Dashboard Overview</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-blue-500 text-white rounded-lg p-6 shadow">
+                <h3 class="text-lg font-semibold">Active Chargers</h3>
+                <p class="text-4xl">5/8</p>
+            </div>
+            <div class="bg-green-500 text-white rounded-lg p-6 shadow">
+                <h3 class="text-lg font-semibold">Customer Reviews</h3>
+                <p class="text-4xl">4.7/5</p>
+            </div>
+            <div class="bg-yellow-500 text-white rounded-lg p-6 shadow">
+                <h3 class="text-lg font-semibold">Available Slots</h3>
+                <p class="text-4xl">3</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Station Info Section -->
+    <section id="station-info" class="container mx-auto my-8 p-6">
+        <h2 class="text-2xl font-bold mb-6">Manage Chargers</h2>
+        <div id="chargers-container" class="mb-4">
+            <!-- Existing chargers will be displayed here -->
+        </div>
+        <form id="add-charger-form" class="flex flex-col gap-4">
+            <div>
+                <label for="chargerType" class="block font-semibold">Charger Type</label>
+                <input id="chargerType" type="text" class="w-full border border-gray-300 p-2 rounded" placeholder="Enter charger type">
+            </div>
+            <div>
+                <label for="chargerCount" class="block font-semibold">Number of Chargers</label>
+                <input id="chargerCount" type="number" class="w-full border border-gray-300 p-2 rounded" placeholder="Enter number of chargers">
+            </div>
+            <button type="button" id="addChargerButton" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Charger</button>
+        </form>
+    </section>
+
+    <!-- Reservations Section -->
+    <section id="reservations" class="container mx-auto my-8 p-6">
+        <h2 class="text-2xl font-bold mb-6">Manage Reservations</h2>
+        <div id="time-slots-container" class="mb-4">
+            <!-- Existing time slots will be displayed here -->
+        </div>
+        <form id="add-time-slot-form" class="flex flex-col gap-4">
+            <div>
+                <label for="timeSlot" class="block font-semibold">Time Slot</label>
+                <input id="timeSlot" type="text" class="w-full border border-gray-300 p-2 rounded" placeholder="Enter time slot (e.g., 8:00 AM - 9:00 AM)">
+            </div>
+            <button type="button" id="addTimeSlotButton" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Time Slot</button>
+        </form>
+    </section>
+
+  
+    <script>
+        const chargersContainer = document.getElementById('chargers-container');
+        const addChargerButton = document.getElementById('addChargerButton');
+        const chargerTypeInput = document.getElementById('chargerType');
+        const chargerCountInput = document.getElementById('chargerCount');
+
+        const timeSlotsContainer = document.getElementById('time-slots-container');
+        const addTimeSlotButton = document.getElementById('addTimeSlotButton');
+        const timeSlotInput = document.getElementById('timeSlot');
+
+        function displayCharger(type, count) {
+            const chargerElement = document.createElement('div');
+            chargerElement.classList.add('p-4', 'bg-gray-100', 'rounded-lg', 'mb-4', 'shadow');
+            chargerElement.innerHTML = `
+                <h3 class="text-lg font-semibold">${type}</h3>
+                <p>Number of Chargers: ${count}</p>
+                <button class="bg-red-500 text-white px-2 py-1 rounded mt-2" onclick="removeElement(this)">Remove</button>
+            `;
+            chargersContainer.appendChild(chargerElement);
+        }
+
+        function displayTimeSlot(slot) {
+            const slotElement = document.createElement('div');
+            slotElement.classList.add('p-4', 'bg-gray-100', 'rounded-lg', 'mb-4', 'shadow');
+            slotElement.innerHTML = `
+                <h3 class="text-lg font-semibold">${slot}</h3>
+                <button class="bg-green-500 text-white px-2 py-1 rounded mt-2" onclick="markAvailable(this)">Mark Available</button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded mt-2" onclick="markUnavailable(this)">Mark Unavailable</button>
+            `;
+            timeSlotsContainer.appendChild(slotElement);
+        }
+
+        function removeElement(button) {
+            button.parentElement.remove();
+        }
+
+        function markAvailable(button) {
+            button.parentElement.style.backgroundColor = '#d1fae5'; // Light green
+        }
+
+        function markUnavailable(button) {
+            button.parentElement.style.backgroundColor = '#fee2e2'; // Light red
+        }
+
+        addChargerButton.addEventListener('click', () => {
+            const type = chargerTypeInput.value;
+            const count = parseInt(chargerCountInput.value);
+
+            if (type && count > 0) {
+                displayCharger(type, count);
+                chargerTypeInput.value = '';
+                chargerCountInput.value = '';
+            } else {
+                alert('Please enter a valid charger type and number.');
+            }
+        });
+
+        addTimeSlotButton.addEventListener('click', () => {
+            const slot = timeSlotInput.value;
+
+            if (slot) {
+                displayTimeSlot(slot);
+                timeSlotInput.value = '';
+            } else {
+                alert('Please enter a valid time slot.');
+            }
+        });
+    </script>
+
+
+<script>
+    fetch('./footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+    
+    
+        </script>
+
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Station Details</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    /* الأساسيات */
+    body {
+      font-family: 'Arial', sans-serif;
+      color: #333; /* لون النص افتراضي وواضح */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* الهيدر */
+    .station-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .station-header h1 {
+      color: #1ABC9C; /* أزرق رئيسي */
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    .station-header p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    /* المعلومات الرئيسية */
+    .station-info {
+      padding: 15px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      border-left: 4px solid #1ABC9C;
+      padding-left: 15px;
+    }
+
+    .station-info ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .station-info ul li {
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #CCC;
+    }
+
+    .station-info ul li strong {
+      color: #1ABC9C;
+    }
+
+    /* أزرار الإجراءات */
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .actions button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #1ABC9C;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #1ABC9C;
+    }
+
+    .btn-success {
+      background-color: #1ABC9C;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background-color: #1ABC9C;
+    }
+
+    .btn-warning {
+      background-color: #1ABC9C;
+      color: black;
+    }
+
+    .btn-warning:hover {
+      background-color: #1ABC9C;
+    }
+
+    /* جدول الحجز */
+    .schedule {
+      margin-top: 20px;
+      padding: 15px;
+      border-left: 4px solid #1ABC9C;
+      padding-left: 15px;
+    }
+
+    .schedule h4 {
+      margin-bottom: 10px;
+      color: #1ABC9C;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #CCC;
+    }
+
+    table th {
+      background-color: #1ABC9C;
+      color: white;
+    }
+
+    .available {
+      color: #1ABC9C;
+      font-weight: bold;
+    }
+
+    .booked {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <script>
+      fetch('./nav.html')
+       .then(response => response.text())
+       .then(data => {
+           document.getElementById('navbar').innerHTML = data;
+
+           const menuToggle = document.querySelector('.menu-toggle');
+           const menu = document.querySelector('.menu');
+           if (menuToggle) {
+               menuToggle.addEventListener('click', () => {
+                   menu.classList.toggle('active');
+               });
+           }
+       });
+  </script>
+
+  <div class="container">
+    <!-- عنوان الصفحة -->
+    <div class="station-header">
+      <h1>Station Details</h1>
+      <p>Explore station details and book your slot</p>
+    </div>
+
+    <!-- المعلومات العامة -->
+    <div class="station-info">
+      <ul>
+        <li><strong>Name:</strong> Abdoun Station</li>
+        <li><strong>Location:</strong> Abdoun, Amman</li>
+        <li><strong>Status:</strong> <span class="available">Available</span></li>
+        <li><strong>Sockets:</strong> 4</li>
+        <li><strong>Charging Levels:</strong> Level 3 (Fast Charging)</li>
+        <li><strong>Chargers:</strong> Type 1, Type 2, CHAdeMO</li>
+        <li><strong>Working Hours:</strong> 24/7</li>
+      </ul>
+    </div>
+
+    <!-- أزرار التحكم -->
+    <div class="actions">
+      <button class="btn btn-primary" onclick="addToFavorites()">Add to Favorites</button>
+      <button class="btn btn-success" onclick="navigateToStation()">Navigate</button>
+      <button class="btn btn-warning" onclick="goToBooking()">Book Now</button>
+    </div>
+
+    <!-- جدول الحجز -->
+    <div class="schedule">
+      <h4>Booking Schedule</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Time Slot</th>
+            <th>Price (per kWh)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>5:00 AM - 5:30 AM</td><td>0.183</td><td class="available">Available</td></tr>
+          <tr><td>5:30 AM - 6:00 AM</td><td>0.183</td><td class="booked">Booked</td></tr>
+          <tr><td>2:00 PM - 2:30 PM</td><td>0.193</td><td class="available">Available</td></tr>
+          <tr><td>5:30 PM - 6:00 PM</td><td>0.213</td><td class="booked">Booked</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function addToFavorites() {
+      alert("Station added to your favorites!");
+    }
+
+    function navigateToStation() {
+      window.open("https://www.google.com/maps?q=31.9496,35.8934", "_blank");
+    }
+
+    function goToBooking() {
+      window.location.href = "/book.html";
+    }
+
+    fetch('./footer.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('beforeend', data);
+    });
+  </script>
+
+</body>
+</html>

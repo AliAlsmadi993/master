@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Login - E-Charge</title>
+    <link rel="stylesheet" href="stylee/Login.css">
+</head>
+<body>
+    <div id="navbar" class="navbar"></div>
+
+    <div class="background-container">
+        <div class="login-container">
+            <div class="login-form">
+                <h1>Login</h1>
+                <p>Access your account</p>
+
+                <div class="form-group">
+                    <select id="userType" name="userType" required>
+                        <option value="" disabled selected>Select User Type</option>
+                        <option value="user">User</option>
+                        <option value="station-owner">Station Owner</option>
+                    </select>
+                    <label for="userType">User Type</label>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="email" name="email" placeholder=" " required>
+                        <label for="email">Email</label>
+                        <small id="emailError" class="error-message"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder=" " required>
+                        <label for="password">Password</label>
+                        <small id="passwordError" class="error-message"></small>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+
+                <div class="extras">
+                    <a href="/forgot-password">Forgot Password?</a>
+                    <a href="Regester.html">Create a New Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="footer"></div>
+
+    <script>
+        // Load navbar
+        fetch('./nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+
+                const menuToggle = document.querySelector('.menu-toggle');
+                const menu = document.querySelector('.menu');
+                if (menuToggle) {
+                    menuToggle.addEventListener('click', () => {
+                        menu.classList.toggle('active');
+                    });
+                }
+            });
+
+        // Load footer
+        fetch('./footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+
+        // Form validation and redirection
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const userType = document.getElementById('userType').value;
+
+            let isValid = true;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                emailError.textContent = "Invalid email format.";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            if (passwordInput.value.length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters long.";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            if (isValid) {
+                if (userType === "station-owner") {
+                    window.location.href = "stationowner.html";
+                } else if (userType === "user") {
+                    window.location.href = "map.html";
+                } else {
+                    alert("Please select a valid user type.");
+                }
+            }
+        });
+
+        // Floating label animations
+        const formGroups = document.querySelectorAll('.form-group');
+
+        formGroups.forEach(group => {
+            const input = group.querySelector('input');
+            const label = group.querySelector('label');
+
+            input.addEventListener('focus', () => {
+                label.classList.add('active');
+            });
+
+            input.addEventListener('blur', () => {
+                if (input.value === '') {
+                    label.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

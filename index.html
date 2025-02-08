@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-CHARGE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="stylee/home.css">
+    <style>
+        /* General Slider Styles */
+        /* .hero-slider {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-content.active {
+            opacity: 1;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            margin-left: 20px;
+        }
+
+        .next {
+            margin-right: 20px;
+        } */
+
+        .hero-section {
+    position: relative;
+    width: 100%;
+    height: 90vh; /* يملأ 90% من الشاشة */
+    overflow: hidden;
+}
+
+#hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* يجعل الفيديو يغطي الشاشة بدون تمدد */
+}
+
+/* التراكب (Overlay) لجعل النص واضحًا */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* تأثير شفاف */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* نص العنوان والوصف */
+.hero-content {
+    color: white;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.hero-title span {
+    color: #1ABC9C; /* لون أزرق مميز */
+}
+
+.hero-description {
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: auto;
+}
+    </style>
+</head>
+<body>
+    
+    <script>
+        fetch('./nav.html')
+         .then(response => response.text())
+         .then(data => {
+             document.getElementById('navbar').innerHTML = data;
+     
+             // إعادة تفعيل زر الـ Burger Menu
+             const menuToggle = document.querySelector('.menu-toggle');
+             const menu = document.querySelector('.menu');
+             if (menuToggle) {
+                 menuToggle.addEventListener('click', () => {
+                     menu.classList.toggle('active');
+                 });
+             }
+         });
+     
+     
+     
+         </script>
+         
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Hero Slider -->
+    <div class="hero-section">
+        <video autoplay muted loop id="hero-video">
+            <source src="/media/HOME.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to <span>E-CHARGE</span></h1>
+                <p class="hero-description">The ultimate solution for EV owners, providing seamless booking and charging management.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slider Navigation Buttons -->
+    <div class="slider-nav">
+        <button class="prev" onclick="prevSlide(); stopAutoSlide()"></button>
+        <button class="next" onclick="nextSlide(); stopAutoSlide()"></button>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" data-aos="zoom-in">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <img src="https://ar.abudhabi.renault.ae/CountriesData/Abu_Dhabi_AR/images/services/zeroemission/Dubai_Charging_Stations_ig_w1200_h675.jpg" alt="Find a Station">
+                <h3>Find a Station</h3>
+                <p>Locate the nearest charging station with real-time availability.</p>
+            </div>
+            <div class="step">
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20230414/pngtree-blurred-woman-charges-electric-car-in-the-background-while-focusing-on-ev-charger-plug-photo-image_51062106.jpg" alt="Book Your Slot">
+                <h3>Book Your Slot</h3>
+                <p>Reserve your charging time in just a few clicks.</p>
+            </div>
+            <div class="step">
+                <img src="https://images.wsj.net/im-793223?width=1280&size=1.33333333" alt="Charge & Go">
+                <h3>Charge & Go</h3>
+                <p>Enjoy a smooth charging experience and hit the road again.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" data-aos="fade-up">
+        <h2>Why Choose E-CHARGE?</h2>
+        <div class="feature-cards">
+            <div class="card">
+                <img src="https://i.ytimg.com/vi/le8X6uWg7YY/maxresdefault.jpg" alt="Fast Service">
+                <h3>Fast Service</h3>
+                <p>Quick and efficient charging solutions for your EV.</p>
+            </div>
+            <div class="card">
+                <img src="https://attaqa.net/wp-content/uploads/2024/03/f4868c2be896cecac30712acbad1b051.jpg" alt="Easy to Use">
+                <h3>Easy to Use</h3>
+                <p>An intuitive platform designed for everyone.</p>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRVDP39TrexPI0FPJx5jHvf14uNTOa1STzQ&s" alt="Eco Friendly">
+                <h3>Eco Friendly</h3>
+                <p>Contributing to a greener and more sustainable future.</p>
+            </div>
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Station_solaire_de_recharge.JPG/800px-Station_solaire_de_recharge.JPG" alt="24/7 Availability">
+                <h3>24/7 Availability</h3>
+                <p>Access our services anytime, anywhere.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Stations Section -->
+    <section class="best-stations" data-aos="fade-left">
+        <h2>Best Charging Stations</h2>
+        <div class="stations-grid">
+            <div class="station-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRom-IumSC6AUj6QgFtUSSkorG0PwUeI6Idrw&s" alt="Station 1">
+                <h3>Station 1</h3>
+                <p>Location: City Center</p>
+            </div>
+            <div class="station-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh_g4JHwyeuBZg-lIbzIU_qEqwmVUekTJlNTZYQKX8IRBvx1VizAIvB4IJur1IYK-z3_s&usqp=CAU" alt="Station 2">
+                <h3>Station 2</h3>
+                <p>Location: Park Avenue</p>
+            </div>
+            <div class="station-card">
+                <img src="https://solarabic.com/wp-content/uploads/2020/11/Untitled-design-2.jpg" alt="Station 3">
+                <h3>Station 3</h3>
+                <p>Location: Main Street</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="testimonials" data-aos="flip-up">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <img src="/img/jone.png" alt="Customer 1">
+                <blockquote>"E-CHARGE made my life easier!"</blockquote>
+                <p>- John D.</p>
+            </div>
+            <div class="testimonial">
+                <img src="/img/sara.png" alt="Customer 2">
+                <blockquote>"No more waiting in line, love it!"</blockquote>
+                <p>- Sarah K.</p>
+            </div>
+            <div class="testimonial">
+                <img src="/img/max.png" alt="Customer 3">
+                <blockquote>"Fantastic support and great service!"</blockquote>
+                <p>- Ahmed R.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const slides = document.querySelectorAll(".slide");
+            const heroContents = document.querySelectorAll(".hero-content");
+            let currentSlide = 0;
+            let autoSlideInterval;
+
+            // Function to show a slide by index
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove("active");
+                    slide.style.opacity = 0;
+                    if (i === index) {
+                        slide.classList.add("active");
+                        setTimeout(() => { slide.style.opacity = 1; }, 100);
+                    }
+                });
+
+                heroContents.forEach((content, i) => {
+                    content.classList.remove("active");
+                    if (i === index) {
+                        content.classList.add("active");
+                    }
+                });
+            }
+
+            // Function to go to the next slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // Function to go to the previous slide
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // Function to start the auto-slide
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }
+
+            // Function to stop the auto-slide
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Initialize slider
+            showSlide(currentSlide);
+            startAutoSlide();
+
+            // Attach event listeners for buttons
+            document.querySelector(".next").addEventListener("click", nextSlide);
+            document.querySelector(".prev").addEventListener("click", prevSlide);
+
+            // Expose functions to global scope for button click handlers
+            window.nextSlide = nextSlide;
+            window.prevSlide = prevSlide;
+
+            // Initialize AOS animations
+            AOS.init({
+                duration: 800,
+                offset: 50,
+                once: true
+            });
+        });
+    </script>
+     <script>
+        fetch('./footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+        </script>
+
+</body>
+</html>

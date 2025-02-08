@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - E-Charge</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylee/contactUs.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <script>
+        fetch('./nav.html')
+         .then(response => response.text())
+         .then(data => {
+             document.getElementById('navbar').innerHTML = data;
+     
+             // إعادة تفعيل زر الـ Burger Menu
+             const menuToggle = document.querySelector('.menu-toggle');
+             const menu = document.querySelector('.menu');
+             if (menuToggle) {
+                 menuToggle.addEventListener('click', () => {
+                     menu.classList.toggle('active');
+                 });
+             }
+         });
+     
+     
+     
+         </script>
+         
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <div class="wrapper" style="margin-top: 5%; margin-bottom: 5%;">
+        <div class="contact-form">
+            <input type="text" id="name" placeholder="Name">
+            <input type="email" id="email" placeholder="Email Address">
+            <input type="text" id="phone" placeholder="Phone">
+            <textarea id="message" placeholder="Your Message"></textarea>
+            <button class="submit-btn" id="sendBtn">Send</button>
+        </div>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094077!2d144.95373531531696!3d-37.816279279751595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5771e7d98764b7d!2sGoogle!5e0!3m2!1sen!2sus!4v1615954732745!5m2!1sen!2sus"
+                allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+    </div>
+
+   
+
+    <div id="footer"></div>
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+    <script>
+        document.getElementById("sendBtn").addEventListener("click", () => {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !phone || !message) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            alert("Message sent successfully!");
+        });
+    </script>
+</body>
+</html>

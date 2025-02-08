@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet"  href="stylee/profileuser.css" >   
+</head>
+<body>
+    <script>
+        fetch('./nav.html')
+         .then(response => response.text())
+         .then(data => {
+             document.getElementById('navbar').innerHTML = data;
+     
+             // إعادة تفعيل زر الـ Burger Menu
+             const menuToggle = document.querySelector('.menu-toggle');
+             const menu = document.querySelector('.menu');
+             if (menuToggle) {
+                 menuToggle.addEventListener('click', () => {
+                     menu.classList.toggle('active');
+                 });
+             }
+         });
+     
+     
+     
+         </script>
+         
+
+    <div id="navbar" ></div>
+    <div class="container" style=" margin-top: 5%; margin-bottom: 5%;">
+        <!-- Sidebar -->
+        <aside class="sidebar " style="opacity: 0.7;">
+            <img src="/img/imgab3.webp" alt="User">
+            <div class="user-info">
+                <h3>John Doe</h3>
+                <p>johndoe@example.com</p>
+            </div>
+            <ul>
+                <li onclick="showSection('profile')" class="active">Personal Information</li>
+                <li onclick="showSection('vehicle')">Vehicle Details</li>
+                <li onclick="showSection('history')">Charging History</li>
+                <li onclick="showSection('settings')">Account Settings</li>
+                <li onclick="showSection('support')">Support</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Personal Information -->
+            <div id="profile" class="section active">
+                <h2>Personal Information</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="profilePicture">Profile Picture</label>
+                        <img id="profileImage" src="https://via.placeholder.com/100" alt="User Image" style="display: block; margin-bottom: 10px; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                        <input type="file" id="profilePicture" accept="image/*" onchange="updateProfileImage(event)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="johndoe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" value="+123 456 789">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" value="123 Main Street, City, Country">
+                    </div>
+                    <button type="button" onclick="alert('Profile updated!')">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- Vehicle Details -->
+            <div id="vehicle" class="section">
+                <h2>Vehicle Details</h2>
+                <p><b>Car Model:</b> Tesla Model S</p>
+                <p><b>Battery Capacity:</b> 100 kWh</p>
+                <p><b>Charging Type:</b> CCS</p>
+                <p><b>License Plate:</b> ABC-1234</p>
+                <p><b>Color:</b> Midnight Silver</p>
+                <p><b>Year:</b> 2023</p>
+                <p><b>VIN:</b> 5YJSA1E26JF123456</p>
+            </div>
+
+            <!-- Charging History -->
+            <div id="history" class="section">
+                <h2>Charging History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Station</th>
+                            <th>Cost</th>
+                            <th>Duration</th>
+                            <th>Energy (kWh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025-02-01</td>
+                            <td>Station A</td>
+                            <td>$15</td>
+                            <td>1h 30m</td>
+                            <td>30 kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2025-02-05</td>
+                            <td>Station B</td>
+                            <td>$20</td>
+                            <td>2h</td>
+                            <td>50 kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2025-02-10</td>
+                            <td>Station C</td>
+                            <td>$25</td>
+                            <td>3h</td>
+                            <td>75 kWh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Account Settings -->
+            <div id="settings" class="section">
+                <h2>Account Settings</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="password">Change Password</label>
+                        <input type="password" id="password" placeholder="New Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Preferred Language</label>
+                        <select id="language">
+                            <option value="english">English</option>
+                            <option value="arabic">Arabic</option>
+                            <option value="french">French</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="alert('Settings updated!')">Save Settings</button>
+                </form>
+            </div>
+
+            <!-- Support -->
+            <div id="support" class="section">
+                <h2>Support</h2>
+                <p>📧 Email: support@echarge.com</p>
+                <p>📞 Phone: +123 456 789</p>
+                <h3>Contact Support</h3>
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="supportName">Your Name</label>
+                        <input type="text" id="supportName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supportEmail">Your Email</label>
+                        <input type="email" id="supportEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supportMessage">Your Message</label>
+                        <textarea id="supportMessage" placeholder="Enter your message" rows="5" required></textarea>
+                    </div>
+                    <button type="button" onclick="submitSupportForm()">Send Message</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.sidebar ul li').forEach(item => item.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        function submitSupportForm() {
+            const name = document.getElementById('supportName').value;
+            const email = document.getElementById('supportEmail').value;
+            const message = document.getElementById('supportMessage').value;
+
+            if (name && email && message) {
+                alert(`Thank you, ${name}! Your message has been sent successfully.`);
+                document.getElementById('supportForm').reset();
+            } else {
+                alert('Please fill out all fields before submitting.');
+            }
+        }
+    </script>
+</body>
+
+       <script>
+        fetch('./footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+        
+            function updateProfileImage(event) {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+        const reader = new FileReader(); // Create a FileReader to read the file
+        reader.onload = function(e) {
+            document.getElementById('profileImage').src = e.target.result; // Update the image src
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+    }
+}
+
+            </script>
+            
+</body>
+</html>

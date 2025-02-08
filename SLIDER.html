@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced User Profile - eCharge</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            height: 60px;
+            background: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            flex: 1;
+            margin-top: 60px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .sidebar .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .user-info h3 {
+            margin-bottom: 5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #2c3e50;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li:hover, .sidebar ul li.active {
+            background: #1abc9c;
+        }
+
+        /* Content */
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: #ecf0f1;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+            width: 100%;
+        }
+
+        .section.active {
+            display: block;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .content p b {
+            color: #2c3e50;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .content table th, .content table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        .content table th {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .content .form-group {
+            margin-bottom: 15px;
+        }
+
+        .content .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .content .form-group input,
+        .content .form-group textarea,
+        .content .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .content button {
+            padding: 10px 20px;
+            background: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .content button:hover {
+            background: #16a085;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        eCharge - Enhanced User Profile
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <img src="https://via.placeholder.com/100" alt="User">
+            <div class="user-info">
+                <h3>John Doe</h3>
+                <p>johndoe@example.com</p>
+            </div>
+            <ul>
+                <li onclick="showSection('profile')" class="active">Personal Information</li>
+                <li onclick="showSection('vehicle')">Vehicle Details</li>
+                <li onclick="showSection('history')">Charging History</li>
+                <li onclick="showSection('settings')">Account Settings</li>
+                <li onclick="showSection('support')">Support</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Personal Information -->
+            <div id="profile" class="section active">
+                <h2>Personal Information</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="johndoe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" value="+123 456 789">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" value="123 Main Street, City, Country">
+                    </div>
+                    <button type="button" onclick="alert('Profile updated!')">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- Vehicle Details -->
+            <div id="vehicle" class="section">
+                <h2>Vehicle Details</h2>
+                <p><b>Car Model:</b> Tesla Model S</p>
+                <p><b>Battery Capacity:</b> 100 kWh</p>
+                <p><b>Charging Type:</b> CCS</p>
+                <p><b>License Plate:</b> ABC-1234</p>
+                <p><b>Color:</b> Midnight Silver</p>
+                <p><b>Year:</b> 2023</p>
+                <p><b>VIN:</b> 5YJSA1E26JF123456</p>
+            </div>
+
+            <!-- Charging History -->
+            <div id="history" class="section">
+                <h2>Charging History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Station</th>
+                            <th>Cost</th>
+                            <th>Duration</th>
+                            <th>Energy (kWh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025-02-01</td>
+                            <td>Station A</td>
+                            <td>$15</td>
+                            <td>1h 30m</td>
+                            <td>30 kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2025-02-05</td>
+                            <td>Station B</td>
+                            <td>$20</td>
+                            <td>2h</td>
+                            <td>50 kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2025-02-10</td>
+                            <td>Station C</td>
+                            <td>$25</td>
+                            <td>3h</td>
+                            <td>75 kWh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Account Settings -->
+            <div id="settings" class="section">
+                <h2>Account Settings</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="password">Change Password</label>
+                        <input type="password" id="password" placeholder="New Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Preferred Language</label>
+                        <select id="language">
+                            <option value="english">English</option>
+                            <option value="arabic">Arabic</option>
+                            <option value="french">French</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="alert('Settings updated!')">Save Settings</button>
+                </form>
+            </div>
+
+            <!-- Support -->
+            <div id="support" class="section">
+                <h2>Support</h2>
+                <p>📧 Email: support@echarge.com</p>
+                <p>📞 Phone: +123 456 789</p>
+                <h3>Contact Support</h3>
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="supportName">Your Name</label>
+                        <input type="text" id="supportName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supportEmail">Your Email</label>
+                        <input type="email" id="supportEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supportMessage">Your Message</label>
+                        <textarea id="supportMessage" placeholder="Enter your message" rows="5" required></textarea>
+                    </div>
+                    <button type="button" onclick="submitSupportForm()">Send Message</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.sidebar ul li').forEach(item => item.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        function submitSupportForm() {
+            const name = document.getElementById('supportName').value;
+            const email = document.getElementById('supportEmail').value;
+            const message = document.getElementById('supportMessage').value;
+
+            if (name && email && message) {
+                alert(`Thank you, ${name}! Your message has been sent successfully.`);
+                document.getElementById('supportForm').reset();
+            } else {
+                alert('Please fill out all fields before submitting.');
+            }
+        }
+    </script>
+</body>
+</html>

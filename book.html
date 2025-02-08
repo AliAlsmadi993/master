@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Charging Slot Booking ⚡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 🌍 إعداد الصفحة */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* 🌌 خلفية الفيديو */
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 30px 0;
+      text-align: center;
+      color: #1ABC9C;
+    }
+
+    .form {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 1.2rem;
+      color: #EAF8F0;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+    }
+
+    input:hover, select:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    select {
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #1ABC9C 50%),
+                        linear-gradient(135deg, #1ABC9C 50%, transparent 50%);
+      background-position: calc(100% - 20px) calc(1.2em), calc(100% - 15px) calc(1.2em);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #EAF8F0;
+    }
+
+    .btn {
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: #1ABC9C;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background: #1ABC9C;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <script>
+    fetch('./nav.html')
+     .then(response => response.text())
+     .then(data => {
+         document.getElementById('navbar').innerHTML = data;
+ 
+         // إعادة تفعيل زر الـ Burger Menu
+         const menuToggle = document.querySelector('.menu-toggle');
+         const menu = document.querySelector('.menu');
+         if (menuToggle) {
+             menuToggle.addEventListener('click', () => {
+                 menu.classList.toggle('active');
+             });
+         }
+     });
+ 
+ 
+     </script>
+     
+
+<!-- Navbar -->
+<div id="navbar" style="width: 103%; margin-top: 0px; margin-top: -2%;"></div>
+
+  <!-- 🌌 خلفية الفيديو -->
+  <video class="background-video" autoplay loop muted>
+    <source src="/media/WhatsApp Video 2025-02-08 at 1.45.05 PM.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="form">
+    <!-- 🚗 البحث واختيار المحطة -->
+    <div class="form-group">
+      <label for="station-search">Search or Select Station</label>
+      <input type="text" id="station-search" placeholder="Type to search for a station...">
+      <select id="station" size="5">
+        <option value="station1">Station 1</option>
+        <option value="station2">Station 2</option>
+        <option value="station3">Station 3</option>
+        <option value="station4">Station 4</option>
+        <option value="station5">Station 5</option>
+      </select>
+    </div>
+
+    <!-- ⚡ اختيار نوع الشاحن -->
+    <div class="form-group">
+      <label for="charger">Select Charger Type</label>
+      <select id="charger">
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+        <option value="chademo">CHAdeMO</option>
+        <option value="ccs">CCS</option>
+        <option value="tesla">Tesla</option>
+      </select>
+    </div>
+
+    <!-- ⏰ اختيار اليوم -->
+    <div class="form-group">
+      <label for="day">Select Day</label>
+      <select id="day">
+        <option value="today">Today</option>
+        <option value="tomorrow">Tomorrow</option>
+        <option value="day-after">Day After Tomorrow</option>
+      </select>
+    </div>
+
+    <!-- ⏰ اختيار وقت البداية -->
+    <div class="form-group">
+      <label for="start-time">Start Time</label>
+      <input type="time" id="start-time">
+    </div>
+
+    <!-- ⏳ اختيار مدة الشحن -->
+    <div class="form-group">
+      <label for="duration">Select Duration</label>
+      <select id="duration">
+        <option value="15">15 Minutes</option>
+        <option value="30">30 Minutes</option>
+        <option value="60">1 Hour</option>
+        <option value="90">1.5 Hours</option>
+        <option value="120">2 Hours</option>
+      </select>
+    </div>
+
+    <!-- 📋 تفاصيل الحجز -->
+    <div class="details">
+      <p>Selected Station: <span id="selected-station">None</span></p>
+      <p>Selected Charger: <span id="selected-charger">None</span></p>
+      <p>Selected Day: <span id="selected-day">None</span></p>
+      <p>Start Time: <span id="selected-start-time">None</span></p>
+      <p>Duration: <span id="selected-duration">None</span></p>
+      <p>End Time: <span id="calculated-end-time">None</span></p>
+    </div>
+
+    <!-- 🔥 زر التأكيد -->
+    <button class="btn" id="confirm">Confirm Booking</button>
+  </div>
+ <!-- Footer -->
+ <div id="footer" style="width: 103%; margin-bottom: -2%;"></div>
+
+ <script>
+     fetch('footer.html')
+         .then(response => response.text())
+         .then(data => document.getElementById('footer').innerHTML = data);
+ </script>
+  <script>
+    const stationSearch = document.getElementById("station-search");
+    const stationSelect = document.getElementById("station");
+    const selectedStation = document.getElementById("selected-station");
+    const chargerSelect = document.getElementById("charger");
+    const selectedCharger = document.getElementById("selected-charger");
+
+    // البحث في قائمة المحطات
+    stationSearch.addEventListener("input", () => {
+      const filter = stationSearch.value.toLowerCase();
+      Array.from(stationSelect.options).forEach(option => {
+        const text = option.textContent.toLowerCase();
+        option.style.display = text.includes(filter) ? "block" : "none";
+      });
+    });
+
+    // عرض المحطة المختارة
+    stationSelect.addEventListener("change", () => {
+      selectedStation.textContent = stationSelect.options[stationSelect.selectedIndex].text;
+    });
+
+    // عرض نوع الشاحن المختار
+    chargerSelect.addEventListener("change", () => {
+      selectedCharger.textContent = chargerSelect.options[chargerSelect.selectedIndex].text;
+    });
+  </script>
+</body>
+</html>

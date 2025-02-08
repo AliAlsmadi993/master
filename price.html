@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charging Rates</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9, #a8dadc);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .navbar {
+            width: 100%;
+        }
+        .footer {
+            width: 100%;
+        }
+        .pricing-table {
+            margin: 20px auto;
+            max-width: 800px;
+            border-collapse: collapse;
+            width: 90%;
+            background-color: white;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .pricing-table th {
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        .pricing-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+        .pricing-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .pricing-table .active {
+            color: red;
+            font-weight: bold;
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        .time-remaining {
+            font-size: 0.9rem;
+            color: gray;
+        }
+        .info-section {
+            margin: 20px;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 800px;
+            text-align: left;
+        }
+        .info-section h2 {
+            margin-top: 0;
+            color: #4CAF50;
+            font-size: 1.8rem;
+        }
+        .info-section p {
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #555;
+        }
+        .info-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        .info-section ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+        .info-section .note {
+            margin-top: 20px;
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script>
+        function fetchAndInsertContent(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(err => console.error("Error fetching content from", url, err));
+        }
+
+        function updatePricingTable() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+
+            const timePeriods = [
+                { start: 5, end: 14, rate: 0.183 },
+                { start: 14, end: 17, rate: 0.193 },
+                { start: 17, end: 23, rate: 0.213 },
+                { start: 23, end: 5, rate: 0.193 }
+            ];
+
+            const rows = document.querySelectorAll('.pricing-table tbody tr');
+            rows.forEach((row, index) => {
+                const period = timePeriods[index];
+                const isActive = (hours >= period.start && hours < period.end) || (period.start > period.end && (hours >= period.start || hours < period.end));
+                row.classList.toggle('active', isActive);
+
+                const timeRemainingCell = row.querySelector('.time-remaining');
+                let timeRemaining;
+                if (isActive) {
+                    const remainingHours = period.end - hours - (minutes > 0 ? 1 : 0);
+                    const remainingMinutes = 60 - minutes;
+                    timeRemaining = `${remainingHours}h ${remainingMinutes}m left`;
+                } else {
+                    const startInHours = (period.start - hours - (minutes > 0 ? 1 : 0) + 24) % 24;
+                    const startInMinutes = 60 - minutes;
+                    timeRemaining = `Starts in ${startInHours}h ${startInMinutes}m`;
+                }
+
+                timeRemainingCell.textContent = timeRemaining || '';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndInsertContent('./nav.html', 'navbar');
+            fetchAndInsertContent('./footer.html', 'footer');
+            updatePricingTable();
+            setInterval(updatePricingTable, 1000);
+        });
+    </script>
+</head>
+<body>
+    <div id="navbar" class="navbar"></div>
+    <table class="pricing-table">
+        <thead>
+            <tr>
+                <th>Time Period</th>
+                <th>Rate (kWh)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5:00 AM - 2:00 PM</td>
+                <td>0.183</td>
+                <td class="time-remaining"></td>
+            </tr>
+            <tr>
+                <td>2:00 PM - 5:00 PM</td>
+                <td>0.193</td>
+                <td class="time-remaining"></td>
+            </tr>
+            <tr>
+                <td>5:00 PM - 11:00 PM</td>
+                <td>0.213</td>
+                <td class="time-remaining"></td>
+            </tr>
+            <tr>
+                <td>11:00 PM - 5:00 AM</td>
+                <td>0.193</td>
+                <td class="time-remaining"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="info-section">
+        <h2>How Charging Rates Work</h2>
+        <p>Our charging rates are designed to offer you flexibility and cost-effectiveness. The rates vary based on the time of day to help manage demand and ensure an efficient energy distribution system. </p>
+        <p>The table above shows the time periods and their corresponding rates. Active time periods are highlighted in red to make it easier for you to see when rates are active or when they will change.</p>
+        <h2>Tips for Efficient Charging</h2>
+        <ul>
+            <li>Charge your vehicle during off-peak hours to save money.</li>
+            <li>Plan your charging schedule to match your driving habits.</li>
+            <li>Monitor the time remaining to the next rate change to optimize costs.</li>
+        </ul>
+        <p class="note">Note: The charging rates displayed above are set and regulated by the government to ensure fairness and transparency for all users.</p>
+    </div>
+    <div id="footer" class="footer"></div>
+</body>
+</html>

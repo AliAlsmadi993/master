@@ -1,0 +1,282 @@
+  /* General Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    height: 60px;
+    background: #2c3e50;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Main Layout */
+.container {
+    display: flex;
+    flex: 1;
+    margin-top: 60px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #34495e;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar .user-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .user-info h3 {
+    margin-bottom: 5px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #2c3e50;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.sidebar ul li:hover, .sidebar ul li.active {
+    background: #1abc9c;
+}
+
+/* Content */
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background: #ecf0f1;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+    width: 100%;
+}
+
+.section.active {
+    display: block;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.content p b {
+    color: #2c3e50;
+}
+
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.content table th, .content table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.content table th {
+    background: #2c3e50;
+    color: white;
+}
+
+.content .form-group {
+    margin-bottom: 15px;
+}
+
+.content .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.content .form-group input,
+.content .form-group textarea,
+.content .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.content button {
+    padding: 10px 20px;
+    background: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.content button:hover {
+    background: #16a085;
+}
+
+#profileImage {
+    border: 2px solid #ccc;
+    padding: 5px;
+    transition: border-color 0.3s ease;
+}
+
+#profileImage:hover {
+    border-color: #1abc9c;
+}
+/* Responsive Design */
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+    /* Sidebar */
+    .sidebar {
+        width: 200px;
+        padding: 15px;
+    }
+
+    .sidebar img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .sidebar .user-info h3 {
+        font-size: 16px;
+    }
+
+    .sidebar ul li {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Content */
+    .content {
+        padding: 15px;
+    }
+
+    .content h2 {
+        font-size: 20px;
+    }
+
+    .content p {
+        font-size: 14px;
+    }
+
+    .content table th, .content table td {
+        font-size: 14px;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .container{
+        margin-top: 10% !important;
+    }
+    /* Navbar */
+    .navbar {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        margin-top: 5%;
+        width: 150px;
+        padding: 10px;
+    }
+
+    .sidebar img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .sidebar .user-info h3 {
+        font-size: 14px;
+    }
+
+    .sidebar ul li {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    /* Content */
+    .content {
+        padding: 10px;
+    }
+
+    .content h2 {
+        font-size: 18px;
+    }
+
+    .content p {
+        font-size: 12px;
+    }
+
+    .content table th, .content table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .content .form-group input,
+    .content .form-group textarea,
+    .content .form-group select {
+        padding: 8px;
+    }
+
+    .content button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+

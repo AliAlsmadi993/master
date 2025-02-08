@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+#map {
+  height: 90vh;
+  width: 100%;
+}
+
+.station-card {
+  width: 250px;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #f8f9fa;
+}
+
+.station-card h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.station-card p {
+  margin: 5px 0;
+}
+
+.station-card ul {
+  padding: 0;
+  margin: 5px 0;
+  list-style: none;
+}
+
+.station-card ul li {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.station-card button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.station-card button.info-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.station-card button.info-btn:hover {
+  background-color: #0056b3;
+}
+
+.station-card button.navigate-btn {
+  background-color: #28a745;
+  color: white;
+  margin-left: 5px;
+}
+
+.station-card button.navigate-btn:hover {
+  background-color: #218838;
+}
